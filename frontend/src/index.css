@@ -140,6 +140,8 @@ textarea {
   border-radius: var(--radius-md);
   outline: none;
   width: 100%;
+  font-size: 16px; /* Prevents auto-zoom on mobile safari/chrome */
+  min-height: 44px; /* Touch target standard */
 }
 
 input:focus,
@@ -148,6 +150,17 @@ textarea:focus {
   border-color: var(--accent-primary);
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 0 2px rgba(0, 242, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  
+  .glass-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
 }
 
 /* Table Design */

@@ -142,8 +142,10 @@ const DepartmentPage = () => {
                 <td>{dept.description || '-'}</td>
                 {user?.role === 'SuperAdmin' && (
                   <td>
-                    <button onClick={() => handleEdit(dept)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(dept._id)} className="btn-delete">Delete</button>
+                    <div className="actions-cell">
+                      <button onClick={() => handleEdit(dept)} className="btn-edit">Edit</button>
+                      <button onClick={() => handleDelete(dept._id)} className="btn-delete">Delete</button>
+                    </div>
                   </td>
                 )}
               </tr>

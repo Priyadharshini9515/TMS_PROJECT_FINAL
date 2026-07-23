@@ -172,7 +172,7 @@
   }
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive Rules for All Devices */
 @media (max-width: 1024px) {
   :root {
     --sidebar-width: 0px;
@@ -180,6 +180,54 @@
 
   .main-content {
     margin-left: 0;
-    padding: 1.5rem;
+    padding: calc(75px + 1.5rem) 1.5rem 1.5rem 1.5rem;
+  }
+
+  .page-header {
+    padding: 1.8rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: calc(75px + 1rem) 1rem 1rem 1rem;
+  }
+
+  .page-header {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+    letter-spacing: -1px;
+  }
+
+  .page-header p {
+    font-size: 0.95rem;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: calc(70px + 0.75rem) 0.75rem 1rem 0.75rem;
+  }
+
+  .page-header {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
   }
 }

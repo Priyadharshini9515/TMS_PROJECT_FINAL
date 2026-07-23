@@ -251,7 +251,14 @@ exports.generateReport = async (req, res) => {
     }
 
     const complaints = await Complaint.find(filter)
-      .populate({ path: 'createdBy', select: 'username email department', populate: { path: 'department', select: 'name' } })
+      .populate({
+        path: 'createdBy',
+        select: 'username email department programme',
+        populate: [
+          { path: 'department', select: 'name' },
+          { path: 'programme', select: 'name' }
+        ]
+      })
       .populate({ path: 'assignedTo', select: 'username email role' })
       .sort({ createdAt: -1 });
 

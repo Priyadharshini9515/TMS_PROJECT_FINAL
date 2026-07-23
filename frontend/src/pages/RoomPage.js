@@ -203,8 +203,10 @@ const RoomPage = () => {
                 <td>{room.capacity || '-'}</td>
                 {user?.role === 'SuperAdmin' && (
                   <td>
-                    <button onClick={() => handleEdit(room)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(room._id)} className="btn-delete">Delete</button>
+                    <div className="actions-cell">
+                      <button onClick={() => handleEdit(room)} className="btn-edit">Edit</button>
+                      <button onClick={() => handleDelete(room._id)} className="btn-delete">Delete</button>
+                    </div>
                   </td>
                 )}
               </tr>

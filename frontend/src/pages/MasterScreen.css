@@ -420,3 +420,93 @@ select option {
 select option:checked {
   background-color: var(--accent-secondary) !important;
 }
+
+/* Device Responsiveness Rules */
+@media (max-width: 768px) {
+  .master-screen-header,
+  .screen-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .screen-header h1,
+  .master-screen-header h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .screen-header .btn-primary,
+  .screen-header .btn-secondary {
+    width: 100%;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 1rem;
+    border-radius: 12px;
+  }
+
+  .master-table th {
+    padding: 0.8rem 1rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .master-table td {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .actions-cell {
+    min-width: unset;
+    gap: 6px;
+  }
+
+  .master-form,
+  .form-card {
+    padding: 1.5rem;
+    margin: 1rem auto;
+    border-radius: 16px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .master-form,
+  .form-card {
+    padding: 1.2rem;
+  }
+
+  .btn-primary {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+}

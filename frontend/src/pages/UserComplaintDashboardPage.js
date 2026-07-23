@@ -115,14 +115,7 @@ const UserComplaintDashboardPage = () => {
 
       {/* Selected Complaint Details Card */}
       {selectedComplaint && (
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          padding: '2.5rem',
-          marginBottom: '2.5rem',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-          border: '1px solid rgba(59, 89, 152, 0.1)'
-        }}>
+        <div className="user-detail-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0, color: '#3b5998', fontSize: '22px', fontWeight: '700' }}>Complaint Details</h3>
             <button
@@ -402,7 +395,7 @@ const UserComplaintDashboardPage = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                <td colSpan="7" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
                   No {filterStatus === 'All' ? 'complaints' : `${filterStatus.toLowerCase()} complaints`} found
                 </td>
               </tr>
@@ -410,6 +403,25 @@ const UserComplaintDashboardPage = () => {
           </tbody>
         </table>
       </div>
+
+      <style>{`
+        .user-detail-card {
+          background-color: white;
+          border-radius: 16px;
+          padding: 2.5rem;
+          margin-bottom: 2.5rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(59, 89, 152, 0.1);
+        }
+
+        @media (max-width: 768px) {
+          .user-detail-card {
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+          }
+        }
+      `}</style>
     </div>
   );
 };

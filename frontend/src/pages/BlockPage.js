@@ -159,8 +159,10 @@ const BlockPage = () => {
                 <td>{block.description || '-'}</td>
                 {user?.role === 'SuperAdmin' && (
                   <td>
-                    <button onClick={() => handleEdit(block)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(block._id)} className="btn-delete">Delete</button>
+                    <div className="actions-cell">
+                      <button onClick={() => handleEdit(block)} className="btn-edit">Edit</button>
+                      <button onClick={() => handleDelete(block._id)} className="btn-delete">Delete</button>
+                    </div>
                   </td>
                 )}
               </tr>

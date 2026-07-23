@@ -59,7 +59,7 @@ const ReportsPage = () => {
       <div className="screen-header"><h1>Complaint Details Report</h1></div>
       {error && <div className="error-message">{error}</div>}
       <div className="card">
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <div className="report-filters-bar">
           <select value={filters.department} onChange={e=>setFilters({...filters, department:e.target.value})}>
             <option value="">All Departments</option>
             {departments.map(d => <option key={d._id} value={d._id}>{d.name}</option>)}
@@ -98,7 +98,7 @@ const ReportsPage = () => {
                   <tr key={r._id}>
                     <td>{new Date(r.createdAt).toLocaleString()}</td>
                     <td>{r.createdBy?.department?.name || '-'}</td>
-                    <td>{r.createdBy?.programme || '-'}</td>
+                    <td>{r.createdBy?.programme?.name || r.createdBy?.programme || '-'}</td>
                     <td>{r.blockName}</td>
                     <td>{r.roomNumber}</td>
                     <td>{r.complaintType}</td>
@@ -112,6 +112,33 @@ const ReportsPage = () => {
           </div>
         )}
       </div>
+
+      <style>{`
+        .report-filters-bar {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .report-filters-bar select,
+        .report-filters-bar input {
+          flex: 1 1 180px;
+          min-width: 140px;
+        }
+
+        @media (max-width: 768px) {
+          .report-filters-bar {
+            flex-direction: column;
+            gap: 10px;
+          }
+
+          .report-filters-bar select,
+          .report-filters-bar input,
+          .report-filters-bar button {
+            width: 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 };

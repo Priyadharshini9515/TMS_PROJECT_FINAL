@@ -144,8 +144,10 @@ const RolePage = () => {
                 <td>{role.permissions?.join(', ') || '-'}</td>
                 {user?.role === 'SuperAdmin' && (
                   <td>
-                    <button onClick={() => handleEdit(role)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(role._id)} className="btn-delete">Delete</button>
+                    <div className="actions-cell">
+                      <button onClick={() => handleEdit(role)} className="btn-edit">Edit</button>
+                      <button onClick={() => handleDelete(role._id)} className="btn-delete">Delete</button>
+                    </div>
                   </td>
                 )}
               </tr>

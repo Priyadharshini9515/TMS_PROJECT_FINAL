@@ -7,18 +7,23 @@ exports.createUser = async (req, res) => {
     const bcrypt = require('bcryptjs');
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({
+    const userData = {
       username,
       email,
       phone,
       password: hashedPassword,
       role,
-      department,
-      programme,
-    });
+    };
+    if (department && department !== '') userData.department = department;
+    if (programme && programme !== '') userData.programme = programme;
 
+    const user = new User(userData);
     await user.save();
-    res.status(201).json({ message: 'User created successfully', user });
+    
+    const userObj = user.toObject();
+    delete userObj.password;
+
+    res.status(201).json({ message: 'User created successfully', user: userObj });
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({ message: 'User with this email or username already exists' });
@@ -62,9 +67,13 @@ exports.getUserById = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { username, email, phone, role, department, programme } = req.body;
+    const updateData = { username, email, phone, role };
+    updateData.department = (department && department !== '') ? department : null;
+    updateData.programme = (programme && programme !== '') ? programme : null;
+
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      { username, email, phone, role, department, programme },
+      updateData,
       { new: true, runValidators: true }
     ).select('-password');
 

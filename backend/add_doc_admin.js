@@ -6,24 +6,29 @@ require('dotenv').config();
 async function addDocAdmin() {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
-        const email = 'superadmin@example.com';
-        const password = 'SuperAdmin@123';
         
-        let user = await User.findOne({ email });
-        if (user) {
-            console.log('User exists, updating password...');
-            user.password = await bcrypt.hash(password, 10);
-            await user.save();
-        } else {
-            console.log('Creating user superadmin@example.com...');
-            const hashedPassword = await bcrypt.hash(password, 10);
-            await User.create({
-                username: 'superadmin_official',
-                email,
-                password: hashedPassword,
-                phone: '1234567890',
-                role: 'SuperAdmin'
-            });
+        const defaultUsers = [
+            { username: 'superadmin_official', email: 'superadmin@example.com', password: 'SuperAdmin@123', role: 'SuperAdmin' },
+            { username: 'admin_official', email: 'admin@example.com', password: 'Admin@123', role: 'SuperAdmin' }
+        ];
+
+        for (const u of defaultUsers) {
+            let user = await User.findOne({ email: u.email });
+            const hashedPassword = await bcrypt.hash(u.password, 10);
+            if (user) {
+                console.log(`User ${u.email} exists, updating password...`);
+                user.password = hashedPassword;
+                await user.save();
+            } else {
+                console.log(`Creating user ${u.email}...`);
+                await User.create({
+                    username: u.username,
+                    email: u.email,
+                    password: hashedPassword,
+                    phone: '1234567890',
+                    role: u.role
+                });
+            }
         }
         console.log('Done!');
         mongoose.disconnect();

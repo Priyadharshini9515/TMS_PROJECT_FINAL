@@ -61,7 +61,12 @@ const ProgrammePage = () => {
   };
 
   const handleEdit = (programme) => {
-    setFormData(programme);
+    setFormData({
+      name: programme.name,
+      shortName: programme.shortName,
+      department: programme.department?._id || programme.department || '',
+      description: programme.description || ''
+    });
     setEditingId(programme._id);
     setShowForm(true);
   };
@@ -162,8 +167,10 @@ const ProgrammePage = () => {
                 <td>{prog.description || '-'}</td>
                 {user?.role === 'SuperAdmin' && (
                   <td>
-                    <button onClick={() => handleEdit(prog)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(prog._id)} className="btn-delete">Delete</button>
+                    <div className="actions-cell">
+                      <button onClick={() => handleEdit(prog)} className="btn-edit">Edit</button>
+                      <button onClick={() => handleDelete(prog._id)} className="btn-delete">Delete</button>
+                    </div>
                   </td>
                 )}
               </tr>

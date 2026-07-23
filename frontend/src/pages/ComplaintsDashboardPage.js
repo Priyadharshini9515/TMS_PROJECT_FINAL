@@ -83,20 +83,20 @@ const ComplaintsDashboardPage = () => {
       {error && <div className="error-message">{error}</div>}
 
       <div style={{ marginTop: 12 }}>
-        <div style={{ display: 'flex', gap: 16, marginBottom: 16, flexWrap: 'wrap' }}>
-          <div className="stat-card total" style={{ flex: '1 1 200px', minWidth: 160 }}>
+        <div className="dashboard-stats">
+          <div className="stat-card total">
             <div className="stat-value">{stats.total}</div>
             <div className="stat-label">Total Complaints</div>
           </div>
-          <div className="stat-card pending" style={{ flex: '1 1 200px', minWidth: 160 }}>
+          <div className="stat-card pending">
             <div className="stat-value">{stats.pending}</div>
             <div className="stat-label">Pending Review</div>
           </div>
-          <div className="stat-card assigned" style={{ flex: '1 1 200px', minWidth: 160 }}>
+          <div className="stat-card assigned">
             <div className="stat-value">{stats.assigned}</div>
             <div className="stat-label">Active Assigned</div>
           </div>
-          <div className="stat-card closed" style={{ flex: '1 1 200px', minWidth: 160 }}>
+          <div className="stat-card closed">
             <div className="stat-value">{stats.closed}</div>
             <div className="stat-label">Successfully Closed</div>
           </div>

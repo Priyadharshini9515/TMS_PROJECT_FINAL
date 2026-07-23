@@ -14,50 +14,58 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  const closeMenu = () => setIsMenuOpen(false);
   const isActive = (path) => location.pathname === path;
+
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 
   if (!isAuthenticated) return null;
 
   return (
     <nav className="navbar-top">
       <div className="navbar-container">
-        <Link to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand" onClick={closeMenu}>
           <div className="brand-logo">T</div>
           <span className="brand-text">TMS</span>
         </Link>
 
         <div className={`nav-links-wrapper ${isMenuOpen ? 'open' : ''}`}>
           <div className="nav-group">
-            <Link to="/complaints/new" className={`navbar-link ${isActive('/complaints/new') ? 'active' : ''}`}>
+            <Link to="/complaints/new" className={`navbar-link ${isActive('/complaints/new') ? 'active' : ''}`} onClick={closeMenu}>
               Raise Complaint
             </Link>
             {user?.role !== 'SuperAdmin' && (
-              <Link to="/my-complaints" className={`navbar-link ${isActive('/my-complaints') ? 'active' : ''}`}>
+              <Link to="/my-complaints" className={`navbar-link ${isActive('/my-complaints') ? 'active' : ''}`} onClick={closeMenu}>
                 My Complaints
               </Link>
             )}
             {user?.role === 'SuperAdmin' && (
               <>
-                <Link to="/departments" className={`navbar-link ${isActive('/departments') ? 'active' : ''}`}>
+                <Link to="/departments" className={`navbar-link ${isActive('/departments') ? 'active' : ''}`} onClick={closeMenu}>
                   Departments
                 </Link>
-                <Link to="/programmes" className={`navbar-link ${isActive('/programmes') ? 'active' : ''}`}>
+                <Link to="/programmes" className={`navbar-link ${isActive('/programmes') ? 'active' : ''}`} onClick={closeMenu}>
                   Programmes
                 </Link>
-                <Link to="/blocks" className={`navbar-link ${isActive('/blocks') ? 'active' : ''}`}>
+                <Link to="/blocks" className={`navbar-link ${isActive('/blocks') ? 'active' : ''}`} onClick={closeMenu}>
                   Blocks
                 </Link>
-                <Link to="/rooms" className={`navbar-link ${isActive('/rooms') ? 'active' : ''}`}>
+                <Link to="/rooms" className={`navbar-link ${isActive('/rooms') ? 'active' : ''}`} onClick={closeMenu}>
                   Rooms
                 </Link>
-                <Link to="/users" className={`navbar-link ${isActive('/users') ? 'active' : ''}`}>
+                <Link to="/users" className={`navbar-link ${isActive('/users') ? 'active' : ''}`} onClick={closeMenu}>
                   Users
                 </Link>
-                <Link to="/roles" className={`navbar-link ${isActive('/roles') ? 'active' : ''}`}>
+                <Link to="/roles" className={`navbar-link ${isActive('/roles') ? 'active' : ''}`} onClick={closeMenu}>
                   Roles
                 </Link>
-                <Link to="/complaints" className={`navbar-link ${isActive('/complaints') ? 'active' : ''}`}>
+                <Link to="/complaints" className={`navbar-link ${isActive('/complaints') ? 'active' : ''}`} onClick={closeMenu}>
                   All Complaints
+                </Link>
+                <Link to="/reports" className={`navbar-link ${isActive('/reports') ? 'active' : ''}`} onClick={closeMenu}>
+                  Reports
                 </Link>
               </>
             )}
