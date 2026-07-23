@@ -14,23 +14,25 @@ const userRoutes = require('./routes/userRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const path = require('path');
 
+const fs = require('fs');
+
 const app = express();
 
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// app.use(cors({
-//   origin: [
-//     'http://localhost:3000',
-//     'https://tms-pi-seven.vercel.app'
-//   ],
-//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true
-// }));
-// app.use(express.json());
 
 // Connect to MongoDB
 connectDB();
@@ -43,8 +45,9 @@ app.use('/api/blocks', blockRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/users', userRoutes);
+
 // Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(uploadsDir));
 
 // Complaints
 app.use('/api/complaints', complaintRoutes);
