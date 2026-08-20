@@ -20,7 +20,11 @@ const LoginPage = () => {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Authentication failed. Please check credentials.');
+      if (!err.response) {
+        setError('Unable to connect to the backend server. Please ensure the backend server is running on port 5000.');
+      } else {
+        setError(err.response?.data?.message || 'Authentication failed. Please check credentials.');
+      }
     } finally {
       setLoading(false);
     }
