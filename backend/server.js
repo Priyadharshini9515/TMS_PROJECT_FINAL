@@ -26,8 +26,24 @@ if (!fs.existsSync(uploadsDir)) {
 
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5000',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5000',
+  'https://tms040.rvscasmcafsd2k25.in',
+  process.env.CLIENT_URL
+].filter(Boolean);
+
+
+
 const corsOptions = {
-  origin: 'https://tms040.rvscasmcafsd2k25.in',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
